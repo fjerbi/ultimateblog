@@ -16,6 +16,9 @@ class BlogServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/front' => public_path('vendor/fjerbi/ultimateblog'),
         ], 'public');
+        $this->publishes([
+            __DIR__.'ultimateblog/database/migrations/' => database_path('migrations')
+        ], 'migrations');
 
     }
     public function register()
