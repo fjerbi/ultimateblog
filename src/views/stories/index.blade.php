@@ -46,8 +46,13 @@
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav navbar-right">
                         <li><a href={{route('ultimateblog.index')}}>Home</a></li>
-
-                     
+                        @guest
+                        <div class="alert alert-danger" role="alert">
+                           You need to be logged in in order to create a story
+                          </div>
+            @else
+                        <li><a href={{route('ultimateblog.create')}}>Create A post</a></li>
+                        @endguest
                         <ul class="navbar-nav ml-auto">
                             <!-- Authentication Links -->
                             @guest
@@ -95,7 +100,7 @@
                 <div class="row">
                     <div class="action">
                         <div class="col-sm-12">
-                            <h1 class="title">Blog</h1>
+                            <h1 class="title">The Ultimate Blog</h1>
                         </div>
                     </div>
                 </div>

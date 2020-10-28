@@ -137,6 +137,13 @@
 
                                               <span ><a href="{{ route('category.stories',$category->slug) }}">{{ $category->name }}</a></span>
                                           @endforeach
+                                   
+                                          <ul >
+                                            @foreach($story->tags as $tag)
+                                               
+                                                <span class="badge badge-primary">{{ $tag->name }}</span>
+                                            @endforeach
+                                        </ul>
                                             </a></li>
                                             <li><a href="#"><i class="fa fa-heart"></i>{{ $story->favorite_to_users->count() }}</a></li>
                                             <li><a href="#"><i class="fa fa-comments"></i>{{ $story->comments->count() }}</a></li>
