@@ -7,12 +7,12 @@
     <meta name="description" content="A web application in which users post their stories and the winner will be awarded">
     <meta name="author" content="Developers365 Jerbi Firas">
     <title>Search in blog</title>
-    <link href="{{asset('front/css/bootstrap.min.css')}}" rel="stylesheet">
-    <link href="{{asset('front/css/font-awesome.min.css')}}" rel="stylesheet">
-    <link href="{{asset('front/css/animate.min.css')}}" rel="stylesheet">
-    <link href="{{asset('front/css/lightbox.css')}}" rel="stylesheet">
-	<link href="{{asset('front/css/main.css')}}" rel="stylesheet">
-	<link href="{{asset('front/css/responsive.css')}}" rel="stylesheet">
+    <link href="{{asset('vendor/fjerbi/ultimateblog/css/bootstrap.min.css')}}" rel="stylesheet">
+    <link href="{{asset('vendor/fjerbi/ultimateblog/css/font-awesome.min.css')}}" rel="stylesheet">
+    <link href="{{asset('vendor/fjerbi/ultimateblog/css/animate.min.css')}}" rel="stylesheet">
+    <link href="{{asset('vendor/fjerbi/ultimateblog/css/lightbox.css')}}" rel="stylesheet">
+	<link href="{{asset('vendor/fjerbi/ultimateblog/css/main.css')}}" rel="stylesheet">
+	<link href="{{asset('vendor/fjerbi/ultimateblog/css/responsive.css')}}" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.css" rel="stylesheet" />
     <!--[if lt IE 9]>
 	    <script src="js/html5shiv.js"></script>
@@ -156,7 +156,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm-12 text-center bottom-separator">
-                    <img src="images/home/under.png" class="img-responsive inline" alt="">
+                    <img src="{{asset('front/images/home/under.png')}}" class="img-responsive inline" alt="">
                 </div>
              
          
@@ -170,13 +170,13 @@
         </div>
     </footer>
     <!--/#footer-->
-  
-    <script type="text/javascript" src="{{asset('front/js/jquery.js')}}"></script>
-    <script type="text/javascript" src="{{asset('front/js/bootstrap.min.js')}}"></script>
-    <script type="text/javascript" src="{{asset('front/js/lightbox.min.js')}}"></script>
-    <script type="text/javascript" src="{{asset('front/js/wow.min.js')}}"></script>
-    <script type="text/javascript" src="{{asset('front/js/main.js')}}"></script>
+
+    <script type="text/javascript" src="{{asset('vendor/fjerbi/ultimateblog/js/jquery.js')}}"></script>
+    <script type="text/javascript" src="{{asset('vendor/fjerbi/ultimateblog/js/bootstrap.min.js')}}"></script>
+    <script type="text/javascript" src="{{asset('vendor/fjerbi/ultimateblog/js/lightbox.min.js')}}"></script>
+    <script type="text/javascript" src="{{asset('vendor/fjerbi/ultimateblog/js/wow.min.js')}}"></script>
+    <script type="text/javascript" src="{{asset('vendor/fjerbi/ultimateblog/js/main.js')}}"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.2/js/toastr.min.js"></script>
-  </body>
-  </html>
-  
+</body>
+</html>
+

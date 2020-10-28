@@ -13,7 +13,7 @@
 
 Route::group(['namespace'=>'fjerbi\ultimateblog\Http\Controllers'], function(){
     Route::get('/home', 'HomeController@index')->name('home');
-    Route::get('/stories','StoryController@index')->name('index');
+    Route::get('/ultimateblog','StoryController@index')->name('index');
     Route::get('story/{slug}','StoryController@details')->name('story.details');
     
     Route::get('/category/{slug}','StoryController@storyByCategory')->name('category.stories');
@@ -41,8 +41,8 @@ Route::group(['namespace'=>'fjerbi\ultimateblog\Http\Controllers'], function(){
         Route::get('user/profile/{id}', 'HomeController@user')->name('user');
         Route::post('ajax', 'ProfileController@ajax')->name('ajax');
         Route::get('profile','UserController@profile')->name('profile');
-        Route::get('/stories','StoryController@index')->name('index');
-         Route::resource('stories','StoryController');
+        Route::get('/ultimateblog','StoryController@index')->name('index');
+         Route::resource('ultimateblog','StoryController');
     });
 
 
