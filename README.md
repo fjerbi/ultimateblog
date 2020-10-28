@@ -8,6 +8,7 @@ The Ultimate Blog is a package that allows you to integrate a whole blog system 
 -Author profile
 -Responsive design
 -Tags System
+-Views count
 
 ## Future Features:
 -Live chatroom
