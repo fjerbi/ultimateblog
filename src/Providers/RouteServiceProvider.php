@@ -33,7 +33,7 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @var string
      */
-    public const STORIES = '/stories';
+    public const ULTIMATEBLOG = '/ultimateblog';
     /**
      * Define your route model bindings, pattern filters, etc.
      *

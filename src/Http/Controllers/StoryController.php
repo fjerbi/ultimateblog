@@ -30,12 +30,18 @@ class StoryController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
+    { 
+        if (!Auth::user()){
+            return redirect()->route('ultimateblog.index')
+            ->with('warning','You are not logged in');
+    }else{
+
+  
         $categories=Category::all();
         $tags=Tag::all();
         return view('ultimateblog::stories.create', compact('categories', 'tags'));
     }
-
+}
     /**
      * Store a newly created resource in storage.
      *

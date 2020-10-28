@@ -14,20 +14,12 @@
 Route::group(['namespace'=>'fjerbi\ultimateblog\Http\Controllers'], function(){
     Route::get('/home', 'HomeController@index')->name('home');
     Route::get('/ultimateblog','StoryController@index')->name('index');
-    Route::get('story/{slug}','StoryController@details')->name('story.details');
-    
+    Route::get('story/{slug}','StoryController@details')->name('story.details');   
     Route::get('/category/{slug}','StoryController@storyByCategory')->name('category.stories');
-    Route::get('/tag/{slug}','StoryController@storyByTag')->name('tag.stories');
-    
-    Route::get('profile/{name}','AuthorController@profile')->name('author.profile');
-   
+    Route::get('/tag/{slug}','StoryController@storyByTag')->name('tag.stories');   
+    Route::get('profile/{name}','AuthorController@profile')->name('author.profile');  
     Route::get('/search','SearchController@search')->name('search');
     
-
-   
-   
-    
-   
     Route::group(['middleware' => ['web']], function () {
         Auth::routes();
         Route::get('story/{slug}','StoryController@details')->name('story.details');
@@ -36,6 +28,7 @@ Route::group(['namespace'=>'fjerbi\ultimateblog\Http\Controllers'], function(){
             Route::post('favorite/{story}/add','FavoriteController@add')->name('story.favorite');
             Route::post('comment/{story}','CommentController@store')->name('comment.store');
          });
+         
        
         Route::get('/about', 'HomeController@about')->name('about');
         Route::get('user/profile/{id}', 'HomeController@user')->name('user');
@@ -47,11 +40,6 @@ Route::group(['namespace'=>'fjerbi\ultimateblog\Http\Controllers'], function(){
 
 
     
- 
-    View::composer('layouts.frontend.partial.footer',function ($view) {
-        $categories = fjerbi\blog\Category::all();
-        $view->with('categories',$categories);
-    });
     
     
     

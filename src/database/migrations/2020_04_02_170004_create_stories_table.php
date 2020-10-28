@@ -25,8 +25,8 @@ class CreateStoriesTable extends Migration
             $table->text('description');
             $table->text('content');
             $table->integer('view_count')->default(0);
-            $table->boolean('status')->default(false);
-            $table->boolean('is_approved')->default(false);
+            $table->boolean('status')->default(true);
+            $table->boolean('is_approved')->default(true);
             $table->timestamps();
         });
     }

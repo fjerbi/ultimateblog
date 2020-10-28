@@ -3,8 +3,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="A web application in which users post their stories and the winner will be awarded">
-    <meta name="author" content="Developers365 Jerbi Firas">
+    <meta name="description" content="The Ultimate blog, create your own story and publish it, like comment and view others stories">
+    <meta name="author" content="Jerbi Firas fjerbi">
     <title>{{$story->title}}</title>
     <link href="{{asset('vendor/fjerbi/ultimateblog/css/bootstrap.min.css')}}" rel="stylesheet">
     <link href="{{asset('vendor/fjerbi/ultimateblog/css/font-awesome.min.css')}}" rel="stylesheet">
@@ -18,10 +18,10 @@
 	    <script src="js/respond.min.js"></script>
     <![endif]-->
     <link rel="shortcut icon" href="images/ico/favicon.ico">
-    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="{{asset('front/images/ico/apple-touch-icon-144-precomposed.png')}}">
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="{{asset('front/images/ico/apple-touch-icon-114-precomposed.png')}}">
-    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="{{asset('front/images/ico/apple-touch-icon-72-precomposed.png')}}">
-    <link rel="apple-touch-icon-precomposed" href="{{asset('front/images/ico/apple-touch-icon-57-precomposed.png')}}">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="{{asset('vendor/fjerbi/ultimateblog/images/ico/apple-touch-icon-144-precomposed.png')}}">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="{{asset('vendor/fjerbi/ultimateblog/images/ico/apple-touch-icon-114-precomposed.png')}}">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="{{asset('vendor/fjerbi/ultimateblog/images/ico/apple-touch-icon-72-precomposed.png')}}">
+    <link rel="apple-touch-icon-precomposed" href="{{asset('vendor/fjerbi/ultimateblog/images/ico/apple-touch-icon-57-precomposed.png')}}">
 </head><!--/head-->
 
 
@@ -45,23 +45,41 @@
                 </div>
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href={{route('stories.index')}}>Home</a></li>
-                        <li><a href= {{route('profile')}} >My profile</a></li>
-                        @if (Route::has('login'))
-                        <div class="top-right links">
-                            @auth
-                                <a href="{{ url('/me') }}">Hello {{Auth::user()->name}}</a>
-                                <li><a href= {{route('logout')}} >Disconnect</a></li>
-                            @else
-                                <a href="{{ route('login') }}">Login</a>
-              
+                        <li><a href={{route('ultimateblog.index')}}>Home</a></li>
+
+                     
+                        <ul class="navbar-nav ml-auto">
+                            <!-- Authentication Links -->
+                            @guest
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                </li>
                                 @if (Route::has('register'))
-                                    <a href="{{ route('register') }}">Register</a>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                    </li>
                                 @endif
-                            @endauth
-                        </div>
-                    @endif                         
-                                          
+                            @else
+                                <li class="nav-item dropdown">
+                                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="{{route('profile')}}" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                        {{ Auth::user()->name }} <span class="caret"></span>
+                                    </a>
+    
+                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                        <a class="dropdown-item" href="{{ route('logout') }}"
+                                           onclick="event.preventDefault();
+                                                         document.getElementById('logout-form').submit();">
+                                            {{ __('Logout') }}
+                                        </a>
+    
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                            @csrf
+                                        </form>
+                                    </div>
+                                </li>
+                            @endguest
+                        </ul>
+
                     </ul>
                 </div>
                 
@@ -69,6 +87,7 @@
         </div>
     </header>
     <!--/#header-->
+
          
 
 
@@ -145,7 +164,7 @@
                                     <div class="author-profile padding">
                                         <div class="row">
                                             <div class="col-sm-2">
-                                                <img src="{{asset('front/images/blogdetails/1.png')}}" alt="">
+                                                <img src="{{asset('vendor/fjerbi/ultimateblog/images/blogdetails/1.png')}}" alt="">
                                             </div>
                                             <div class="col-sm-10">
                                                 <h3>{{$story->user->name}}</h3>
@@ -167,7 +186,7 @@
                                                 <ul class="media-list">
                                                     <li class="post-comment reply">
                                                         <a class="pull-left" href="#">
-                                                            <img class="media-object" src="{{asset('front/images/blogdetails/3.png')}}" alt="">
+                                                            <img class="media-object" src="{{asset('vendor/fjerbi/ultimateblog/images/blogdetails/3.png')}}" alt="">
                                                         </a>
                                                         @guest
                             <p>For post a new comment. You need to login first. <a href="{{ route('login') }}">Login</a></p>
@@ -187,7 +206,7 @@
                                         <li class="media">
                                             <div class="post-comment">
                                                 <a class="pull-left" href="#">
-                                                    <img class="media-object" src="asset('front/images/blogdetails/4.png')}}" alt="">
+                                                    <img class="media-object" src="asset('vendor/fjerbi/ultimateblog/images/blogdetails/4.png')}}" alt="">
                                                 </a>
                                                 @if($story->comments->count() > 0)
                                                 @foreach($story->comments as $comment)
@@ -240,7 +259,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm-12 text-center bottom-separator">
-                    <img src="{{asset('front/images/home/under.png')}}" class="img-responsive inline" alt="">
+                    <img src="{{asset('vendor/fjerbi/ultimateblog/images/home/under.png')}}" class="img-responsive inline" alt="">
                 </div>
              
          
