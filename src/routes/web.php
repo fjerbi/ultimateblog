@@ -29,7 +29,7 @@ Route::group(['namespace'=>'fjerbi\ultimateblog\Http\Controllers'], function(){
             Route::post('comment/{story}','CommentController@store')->name('comment.store');
          });
          
-       
+         Route::get('/tag/{slug}','StoryController@storyByTag')->name('tag.stories');
         Route::get('/about', 'HomeController@about')->name('about');
         Route::get('user/profile/{id}', 'HomeController@user')->name('user');
         Route::post('ajax', 'ProfileController@ajax')->name('ajax');

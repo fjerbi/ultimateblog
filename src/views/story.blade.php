@@ -141,7 +141,7 @@
                                           <ul >
                                             @foreach($story->tags as $tag)
                                                
-                                                <span class="badge badge-primary">{{ $tag->name }}</span>
+                                                <span class="badge badge-primary"><a href="{{ route('tag.stories',$tag->slug) }}">{{ $tag->name }}</span>
                                             @endforeach
                                         </ul>
                                             </a></li>
