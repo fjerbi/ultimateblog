@@ -1,0 +1,19 @@
+{
+    "name": "fjerbi/ultimateblog",
+    "description": "The ultimate blog, a package that will allow you to integrate a blog system with likes/ dislikes on posts, comment system,Notification system, author profile and views count",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "fjerbi",
+            "email": "firas.jerbi@esprit.tn"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "fjerbi\\ultimateblog\\":"src/"
+        }
+    }
+}
