@@ -13,3 +13,6 @@ The Ultimate Blog is a package that allows you to integrate a whole blog system 
 -Live chatroom
 -Follow/Unfollow Author
 -Admin panel 
+
+# Package Configuration: 
+A full tutorial and demo will be posted soon
