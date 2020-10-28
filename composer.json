@@ -15,5 +15,12 @@
         "psr-4": {
             "fjerbi\\ultimateblog\\":"src/"
         }
+    },
+    "extra": {
+        "laravel":{
+            "providers":[
+                "fjerbi\\ultimateblog\\BlogServiceProvider"
+            ]
+        }
     }
 }
