@@ -19,7 +19,7 @@ Route::group(['namespace'=>'fjerbi\ultimateblog\Http\Controllers'], function(){
     Route::get('/tag/{slug}','StoryController@storyByTag')->name('tag.stories');   
     Route::get('profile/{name}','AuthorController@profile')->name('author.profile');  
     Route::get('/search','SearchController@search')->name('search');
-    
+    Route::post('subscriber','SubscriberController@store')->name('subscriber.store');
     Route::group(['middleware' => ['web']], function () {
         Auth::routes();
         Route::get('story/{slug}','StoryController@details')->name('story.details');

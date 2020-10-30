@@ -10,6 +10,7 @@ The Ultimate Blog is a package that allows you to integrate a whole blog system 
 * Responsive design
 * Tags System
 * Views count
+* Subscribe to blog
 
 ## Future Features:
 * Live chatroom
@@ -17,4 +18,6 @@ The Ultimate Blog is a package that allows you to integrate a whole blog system 
 * Admin panel 
 
 # Package Configuration: 
-A full tutorial and demo will be posted soon
+
+Install the package by typing this command :
+composer require fjerbi/ultimateblog

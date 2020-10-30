@@ -180,7 +180,13 @@
                     <img src="{{asset('vendor/fjerbi/ultimateblog/images/home/under.png')}}" class="img-responsive inline" alt="">
                 </div>
              
-         
+                <div class="input-area">
+                    <form method="POST" action="{{ route('subscriber.store') }}">
+                        @csrf
+                        <input class="email-input" name="email" type="email" placeholder="Enter your email">
+                        <button class="btn btn-outline-primary" type="submit"><i class="icon ion-ios-email-outline"></i></button>
+                    </form>
+                </div>
                 <div class="col-sm-12">
                     <div class="copyright-text text-center">
             

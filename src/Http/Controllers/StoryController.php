@@ -7,6 +7,7 @@ use Auth;
 use fjerbi\ultimateblog\Category;
 use fjerbi\ultimateblog\Tag;
 use fjerbi\ultimateblog\Story;
+use fjerbi\ultimateblog\Notifications\NewStoryNotify;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 class StoryController extends Controller
@@ -58,19 +59,48 @@ class StoryController extends Controller
             'content' => 'required',
 
         ]);
+        $image = $request->file('image');
+        $slug = str_slug($request->title);
+        if(isset($image))
+        {
+//            make unipue name for image
+            $currentDate = Carbon::now()->toDateString();
+            $imageName  = $slug.'-'.$currentDate.'-'.uniqid().'.'.$image->getClientOriginalExtension();
+
+            if(!Storage::disk('public')->exists('story'))
+            {
+                Storage::disk('public')->makeDirectory('story');
+            }
+
+            $storyImage = Image::make($image)->resize(1600,1066)->save();
+            Storage::disk('public')->put('story/'.$imageName,$storytImage);
+
+        } else {
+            $imageName = "default.png";
+        }
         $slug = Str::slug($request->title);
         $request['slug'] = $slug;
 
         $story= new Story();
-       $story->user_id= Auth::id();
-$story->title=$request->title;
-$story->slug=$slug;
-$story->description=$request->description;
-$story->content=$request->content;
-$story->save();
+        $story->user_id= Auth::id();
+        $story->title=$request->title;
+        $story->slug=$slug;
+        $story->image = $imageName;
+        $story->description=$request->description;
+        $story->content=$request->content;
+        $story->save();
 
         $story->categories()->attach($request->category);
         $story->tags()->attach($request->tags);
+        $subscribers = Subscriber::all();
+        foreach ($subscribers as $subscriber)
+        {
+            Notification::route('mail',$subscriber->email)
+                ->notify(new NewPostNotify($story));
+        }
+
+        Toastr::success('Story Successfully Saved :)','Success');
+
         return redirect()->route('stories.index')
                         ->with('success','Story created successfully.');
     }

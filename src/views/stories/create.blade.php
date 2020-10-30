@@ -153,7 +153,7 @@
                     </h5>
                   </div>
                  
-                    <button class="btn btn-primary" type="submit">Save & Publish </button>
+                    <button class="btn btn-outline-primary" type="submit">Save & Publish </button>
                   
                 </div>
               </div>
