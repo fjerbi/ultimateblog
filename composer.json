@@ -10,9 +10,7 @@
         }
     ],
     "minimum-stability": "dev",
-    "require": {
-        "brian2694/laravel-toastr": "^5.54"
-    },
+    "require": {},
     "autoload": {
         "psr-4": {
             "fjerbi\\ultimateblog\\":"src/"
