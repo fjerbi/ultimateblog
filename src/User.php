@@ -53,10 +53,6 @@ class User extends Authenticatable
     {
         return $this->hasMany('fjerbi\ultimateblog\Comment');
     }
-    public function achievements()
-    {
-        return $this->hasMany('fjerbi\ultimateblog\Achievement');
-    }
 
    
 }
