@@ -18,13 +18,15 @@ The Ultimate Blog is a package that allows you to integrate a whole blog system 
 * Follow/Unfollow Author
 * Admin panel 
 
-# TO DO :
-* Improving UI
-* fix minor bugs
-* adding user badges (depending on user points)
-
-
 # Package Configuration: 
+Soon ..
 
-Install the package by typing this command :
-composer require fjerbi/ultimateblog
+# Screenshots:
+## One post page
+![Alt text](initial_release_screensthots/demo1.png?raw=true "One post")
+## Blog Homepage
+![Alt text](initial_release_screensthots/demo2.png?raw=true "Home page")
+## Getting error while liking a post because the user is not logged in
+![Alt text](initial_release_screensthots/demo3.png?raw=true "Error while liking a post cause user is nor logged in")
+## Creating one Post
+![Alt text](initial_release_screensthots/demo4.png?raw=true "Create a post")
