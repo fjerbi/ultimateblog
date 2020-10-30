@@ -18,6 +18,12 @@ The Ultimate Blog is a package that allows you to integrate a whole blog system 
 * Follow/Unfollow Author
 * Admin panel 
 
+# TO DO :
+* Improving UI
+* fix minor bugs
+* adding user badges (depending on user points)
+
+
 # Package Configuration: 
 
 Install the package by typing this command :
