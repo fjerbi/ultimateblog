@@ -154,8 +154,9 @@
                                     </form>
                                 @endguest
                                     <div class="post-bottom overflow">
+                                        <h3>Tags:</h3>
                                         <ul class="nav nav-justified post-nav">
-                                            
+                                         
                                         <li><a href="#" class="badge badge-secondary">
                                             @foreach($tags as $tag)
                                             {{$tag->name}}
@@ -164,14 +165,17 @@
                                             <li><a href="#"><i class="fa fa-eye"></i>{{ $story->view_count }}</a></li>
                                             <li><a href="#"><i class="fa fa-comments"></i>{{ $story->comments->count() }}</a></li>
                                             @if(Auth::id() == $story->user_id)
-                                            Display Edit
+                                            <button class="btn btn-outline-info">Edit<i class="icon ion-ios-email-outline"></i></button>
                                            @else
                                           
                                           
                                       @endif
-                                           <li><button class="btn btn-danger waves-effect" type="button">
-                                                <i class="material-icons">delete</i>
-                                            </button></li>
+                                      @if(Auth::id() == $story->user_id)
+                                      <button class="btn btn-outline-danger">Delete<i class="icon ion-ios-email-outline"></i></button>
+                                     @else
+                                    
+                                    
+                                @endif
                                             <form  id="delete-form-{{ $story->id }}" action="{{ route('ultimateblog.edit',$story->id) }}" method="POST" style="display: none;">
                                                 @csrf
                                                 @method('DELETE')

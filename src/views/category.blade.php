@@ -93,24 +93,7 @@
 
 
 
-    <footer id="footer">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-12 text-center bottom-separator">
-                    <img src="{{asset('vendor/fjerbi/ultimateblog/images/home/under.png')}}" class="img-responsive inline" alt="">
-                </div>
-             
-         
-                <div class="col-sm-12">
-                    <div class="copyright-text text-center">
-            
-                        <p>Ultimate blog by <a target="_blank" href="https://fjerbi.github.io">Firas Jerbi</a></p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer>
-    <!--/#footer-->
+
     <section id="blog-details" class="padding-top">
         <div class="container">
 
@@ -119,7 +102,7 @@
                     <div class="col-md-6 col-sm-12 blog-padding-right">
                         <div class="single-blog two-column">
                             <div class="post-thumb">
-                                <a href="{{ route('story.details',$story->slug) }}"><img src="https://elements-video-cover-images-0.imgix.net/files/c59153ca-3e05-4b41-8c95-70dd65500227/inline_image_preview.jpg?auto=compress%2Cformat&fit=min&h=394&w=700&s=c15e336b9593319970b963b94eae1107" class="img-responsive" alt=""></a>
+                                <a href="{{ route('story.details',$story->slug) }}"><img src="/storage/images/{{$story->image}}" class="img-responsive" alt=""></a>
                                 <div class="post-overlay">
                                     <span class="uppercase"><a href="#"><small>{{$story->created_at->diffForHumans()}}</small> <br></a></span>
                                 </div>
@@ -167,7 +150,24 @@
 
         </div><!-- container -->
     </section>
-
+    <footer id="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 text-center bottom-separator">
+                    <img src="{{asset('vendor/fjerbi/ultimateblog/images/home/under.png')}}" class="img-responsive inline" alt="">
+                </div>
+             
+         
+                <div class="col-sm-12">
+                    <div class="copyright-text text-center">
+            
+                        <p>Ultimate blog by <a target="_blank" href="https://fjerbi.github.io">Firas Jerbi</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!--/#footer-->
     <script type="text/javascript" src="{{asset('vendor/fjerbi/ultimateblog/js/jquery.js')}}"></script>
     <script type="text/javascript" src="{{asset('vendor/fjerbi/ultimateblog/js/bootstrap.min.js')}}"></script>
     <script type="text/javascript" src="{{asset('vendor/fjerbi/ultimateblog/js/lightbox.min.js')}}"></script>
