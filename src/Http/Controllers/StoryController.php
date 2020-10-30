@@ -12,7 +12,6 @@ use Illuminate\Support\Facades\Notification;
 use Carbon\Carbon;
 use fjerbi\ultimateblog\Notifications\NewStoryNotify;
 use Illuminate\Http\Request;
-use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Session;
@@ -26,8 +25,8 @@ class StoryController extends Controller
     public function index()
     {
         $stories = Story::latest()->paginate(5);
-
-        return view('ultimateblog::stories.index',compact('stories'));
+        $tags = Story::all();
+        return view('ultimateblog::stories.index',compact('stories','tags'));
 
     }
 
@@ -106,8 +105,7 @@ class StoryController extends Controller
             Notification::route('mail',$subscriber->email)
                 ->notify(new NewStoryNotify($story));
         }
-
-        Toastr::success('Story Successfully Saved :)','Success');
+    
 
         return redirect()->route('stories.index')
                         ->with('success','Story created successfully.');

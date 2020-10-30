@@ -155,7 +155,12 @@
                                 @endguest
                                     <div class="post-bottom overflow">
                                         <ul class="nav nav-justified post-nav">
-                                            <li><a href="#"><i class="fa fa-tag"></i> Horror</a></li>
+                                            
+                                        <li><a href="#" class="badge badge-secondary">
+                                            @foreach($tags as $tag)
+                                            {{$tag->name}}
+                                            @endforeach
+                                        </a></li>
                                             <li><a href="#"><i class="fa fa-eye"></i>{{ $story->view_count }}</a></li>
                                             <li><a href="#"><i class="fa fa-comments"></i>{{ $story->comments->count() }}</a></li>
                                             @if(Auth::id() == $story->user_id)
