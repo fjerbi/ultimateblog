@@ -19,6 +19,9 @@ class BlogServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'ultimateblog/database/migrations/' => database_path('migrations')
         ], 'migrations');
+        $this->publishes([
+            __DIR__. 'config/auth.php' =>config_path('auth.php')
+        ]);
 
     }
     public function register()
