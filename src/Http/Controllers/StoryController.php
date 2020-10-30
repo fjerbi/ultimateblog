@@ -107,7 +107,7 @@ class StoryController extends Controller
         }
     
 
-        return redirect()->route('stories.index')
+        return redirect()->route('ultimateblog.index')
                         ->with('success','Story created successfully.');
     }
 
