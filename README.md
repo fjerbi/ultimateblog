@@ -5,6 +5,7 @@ The Ultimate Blog is a package that allows you to integrate a whole blog system 
 * Likes/Dislikes
 * Commenting system
 * Search posts
+* Post user control system
 * Notification and alerts system
 * Author profile
 * Responsive design
