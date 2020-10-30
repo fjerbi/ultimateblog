@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Notification;
 use Carbon\Carbon;
 use fjerbi\ultimateblog\Notifications\NewStoryNotify;
 use Illuminate\Http\Request;
+use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Session;
