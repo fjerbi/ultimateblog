@@ -15,7 +15,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Session;
-use Brian2694\Toastr\Facades\Toastr;
 class StoryController extends Controller
 {
     /**
@@ -78,7 +77,7 @@ class StoryController extends Controller
             // Filename to store
             $fileNameToStore= $filename.'_'.time().'.'.$extension;
             // Upload Image
-            $path = $request->file('image')->storeAs('public/images/', $fileNameToStore);
+            $path = $request->file('image')->storeAs('public/images', $fileNameToStore);
         } else {
             $fileNameToStore = 'noimage.jpg';
         }
@@ -142,56 +141,21 @@ class StoryController extends Controller
      * @param  \App\Story  $story
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Story $story,$id)
+    public function update(Request $request, Story $story)
     {
-        $this->validate($request,[
+        $request->validate([
             'title' => 'required',
             'description' => 'required',
             'category' => 'required',
             'tags' => 'required',
             'content' => 'required',
-            'image'=>'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
+
         ]);
-       // Store File & Get Path
-          //IMAGE 
-          if($request->hasFile('image')){
-            // Get filename with the extension
-            $filenameWithExt = $request->file('image')->getClientOriginalName();
-            // Get just filename
-            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
-            // Get just ext
-            $extension = $request->file('image')->getClientOriginalExtension();
-            // Filename to store
-            $fileNameToStore= $filename.'_'.time().'.'.$extension;
-            // Upload Image
-            $path = $request->file('image')->storeAs('public/images/', $fileNameToStore);
-        } else {
-            $fileNameToStore = 'noimage.jpg';
-        }
-        $slug = Str::slug($request->title);
-        $request['slug'] = $slug;
+        $story->update($request->all());
 
-        $story= new Story();
-        
-        $story->user_id= Auth::id();
-        $story->title=$request->title;
-        $story->slug=$slug;
-        $story->image = $fileNameToStore;
-        $story->description=$request->description;
-        $story->content=$request->content;
-        $file = $request->file('student_photo');
-
-       
-        $story->save();
-   
-
-        $story->categories()->sync($request->categories);
-        $story->tags()->sync($request->tags);
-
-        Toastr::success(' Story Successfully Updated :)','Success');
-        return redirect()->route('stories.index');
+        return redirect()->route('stories.index')
+                        ->with('success','Story updated successfully');
     }
-
 
     /**
      * Remove the specified resource from storage.
@@ -202,7 +166,7 @@ class StoryController extends Controller
     public function destroy(Story $story)
     {
 
-        Story::where(user_id,Auth::user()->id)->destroy($id);
+        $story->delete();
 
         return redirect()->route('stories.index')
                         ->with('success','Story deleted successfully');

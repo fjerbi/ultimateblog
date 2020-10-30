@@ -122,7 +122,7 @@
                          <div class="col-md-12 col-sm-12">
                             <div class="single-blog blog-details two-column">
                                 <div class="post-thumb">
-                                    <a href="#"><img src="https://picsum.photos/200/300" class="img-responsive" alt=""></a>
+                                    <a href="#"><img src="/storage/images/{{$story->image}}" class="img-responsive" alt=""></a>
                                     <div class="post-overlay">
                                         <span class="uppercase"><a href="#">14 <br><small>Feb</small></a></span>
                                     </div>
@@ -251,7 +251,7 @@
 
                                 <li>
                                   <p>{{ $randomstory->title }}</p>
-                                  <a href="#"><img src="https://picsum.photos/200/300" alt="{{ $randomstory->title }}" class="img-rounded img-responsive"></a></li>
+                                  <a href="#"><img src="/storage/images/{{$story->image}}" alt="{{ $randomstory->title }}" class="img-rounded img-responsive"></a></li>
                              
                                 @endforeach
                             </ul>
