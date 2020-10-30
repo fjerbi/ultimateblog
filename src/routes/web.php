@@ -26,6 +26,8 @@ Route::group(['namespace'=>'fjerbi\ultimateblog\Http\Controllers'], function(){
         Route::get('/me', 'ProfileController@index')->name('profile');
         Route::group(['middleware'=>['auth']], function (){
             Route::post('favorite/{story}/add','FavoriteController@add')->name('story.favorite');
+            Route::resource('ultimateblog','StoryController');
+    
             Route::post('comment/{story}','CommentController@store')->name('comment.store');
          });
          

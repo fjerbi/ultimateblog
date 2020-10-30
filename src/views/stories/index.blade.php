@@ -129,7 +129,8 @@
                         <div class="col-md-6 col-sm-12 blog-padding-right">
                             <div class="single-blog two-column">
                                 <div class="post-thumb">
-                                    <a href="{{ route('story.details',$story->slug) }}"><img src="https://elements-video-cover-images-0.imgix.net/files/c59153ca-3e05-4b41-8c95-70dd65500227/inline_image_preview.jpg?auto=compress%2Cformat&fit=min&h=394&w=700&s=c15e336b9593319970b963b94eae1107" class="img-responsive" alt=""></a>
+                                    
+                                    <a href="{{ route('story.details',$story->slug) }}"><img src="/storage/images/{{$story->image}}" class="img-responsive" alt="{{$story->title}}"></a>
                                     <div class="post-overlay">
                                         <span class="uppercase"><a href="#"><small>{{$story->created_at->diffForHumans()}}</small> <br></a></span>
                                     </div>
@@ -157,6 +158,19 @@
                                             <li><a href="#"><i class="fa fa-tag"></i> Horror</a></li>
                                             <li><a href="#"><i class="fa fa-eye"></i>{{ $story->view_count }}</a></li>
                                             <li><a href="#"><i class="fa fa-comments"></i>{{ $story->comments->count() }}</a></li>
+                                            @if(Auth::id() == $story->user_id)
+                                            Display Edit
+                                           @else
+                                          
+                                          
+                                      @endif
+                                           <li><button class="btn btn-danger waves-effect" type="button">
+                                                <i class="material-icons">delete</i>
+                                            </button></li>
+                                            <form id="delete-form-{{ $story->id }}" action="{{ route('ultimateblog.edit',$story->id) }}" method="POST" style="display: none;">
+                                                @csrf
+                                                @method('DELETE')
+                                            </form>
                                         </ul>
                                     </div>
                                 </div>
@@ -204,6 +218,38 @@
     <script type="text/javascript" src="{{asset('vendor/fjerbi/ultimateblog/js/wow.min.js')}}"></script>
     <script type="text/javascript" src="{{asset('vendor/fjerbi/ultimateblog/js/main.js')}}"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.2/js/toastr.min.js"></script>
+    <script type="text/javascript">
+        function deletePost(id) {
+            swal({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!',
+                cancelButtonText: 'No, cancel!',
+                confirmButtonClass: 'btn btn-success',
+                cancelButtonClass: 'btn btn-danger',
+                buttonsStyling: false,
+                reverseButtons: true
+            }).then((result) => {
+                if (result.value) {
+                    event.preventDefault();
+                    document.getElementById('delete-form-'+id).submit();
+                } else if (
+                    // Read more about handling dismissals
+                    result.dismiss === swal.DismissReason.cancel
+                ) {
+                    swal(
+                        'Cancelled',
+                        'Your data is safe :)',
+                        'error'
+                    )
+                }
+            })
+        }
+    </script>
 </body>
 </html>
 

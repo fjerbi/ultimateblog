@@ -2,14 +2,20 @@
 
 
 namespace fjerbi\ultimateblog\Http\Controllers;
-use Str;
+use Illuminate\Support\Str;
 use Auth;
 use fjerbi\ultimateblog\Category;
 use fjerbi\ultimateblog\Tag;
 use fjerbi\ultimateblog\Story;
+use fjerbi\ultimateblog\Subscriber;
+use Illuminate\Support\Facades\Notification;
+use Carbon\Carbon;
 use fjerbi\ultimateblog\Notifications\NewStoryNotify;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Session;
+use Brian2694\Toastr\Facades\Toastr;
 class StoryController extends Controller
 {
     /**
@@ -57,37 +63,39 @@ class StoryController extends Controller
             'category' => 'required',
             'tags' => 'required',
             'content' => 'required',
+            'image'=>'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
 
         ]);
-        $image = $request->file('image');
-        $slug = str_slug($request->title);
-        if(isset($image))
-        {
-//            make unipue name for image
-            $currentDate = Carbon::now()->toDateString();
-            $imageName  = $slug.'-'.$currentDate.'-'.uniqid().'.'.$image->getClientOriginalExtension();
-
-            if(!Storage::disk('public')->exists('story'))
-            {
-                Storage::disk('public')->makeDirectory('story');
-            }
-
-            $storyImage = Image::make($image)->resize(1600,1066)->save();
-            Storage::disk('public')->put('story/'.$imageName,$storytImage);
-
+           // Store File & Get Path
+          //IMAGE 
+          if($request->hasFile('image')){
+            // Get filename with the extension
+            $filenameWithExt = $request->file('image')->getClientOriginalName();
+            // Get just filename
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            // Get just ext
+            $extension = $request->file('image')->getClientOriginalExtension();
+            // Filename to store
+            $fileNameToStore= $filename.'_'.time().'.'.$extension;
+            // Upload Image
+            $path = $request->file('image')->storeAs('public/images/', $fileNameToStore);
         } else {
-            $imageName = "default.png";
+            $fileNameToStore = 'noimage.jpg';
         }
         $slug = Str::slug($request->title);
         $request['slug'] = $slug;
 
         $story= new Story();
+        
         $story->user_id= Auth::id();
         $story->title=$request->title;
         $story->slug=$slug;
-        $story->image = $imageName;
+        $story->image = $fileNameToStore;
         $story->description=$request->description;
         $story->content=$request->content;
+        $file = $request->file('student_photo');
+
+       
         $story->save();
 
         $story->categories()->attach($request->category);
@@ -96,7 +104,7 @@ class StoryController extends Controller
         foreach ($subscribers as $subscriber)
         {
             Notification::route('mail',$subscriber->email)
-                ->notify(new NewPostNotify($story));
+                ->notify(new NewStoryNotify($story));
         }
 
         Toastr::success('Story Successfully Saved :)','Success');
@@ -134,21 +142,56 @@ class StoryController extends Controller
      * @param  \App\Story  $story
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Story $story)
+    public function update(Request $request, Story $story,$id)
     {
-        $request->validate([
+        $this->validate($request,[
             'title' => 'required',
             'description' => 'required',
             'category' => 'required',
             'tags' => 'required',
             'content' => 'required',
-
+            'image'=>'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
         ]);
-        $story->update($request->all());
+       // Store File & Get Path
+          //IMAGE 
+          if($request->hasFile('image')){
+            // Get filename with the extension
+            $filenameWithExt = $request->file('image')->getClientOriginalName();
+            // Get just filename
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            // Get just ext
+            $extension = $request->file('image')->getClientOriginalExtension();
+            // Filename to store
+            $fileNameToStore= $filename.'_'.time().'.'.$extension;
+            // Upload Image
+            $path = $request->file('image')->storeAs('public/images/', $fileNameToStore);
+        } else {
+            $fileNameToStore = 'noimage.jpg';
+        }
+        $slug = Str::slug($request->title);
+        $request['slug'] = $slug;
 
-        return redirect()->route('stories.index')
-                        ->with('success','Story updated successfully');
+        $story= new Story();
+        
+        $story->user_id= Auth::id();
+        $story->title=$request->title;
+        $story->slug=$slug;
+        $story->image = $fileNameToStore;
+        $story->description=$request->description;
+        $story->content=$request->content;
+        $file = $request->file('student_photo');
+
+       
+        $story->save();
+   
+
+        $story->categories()->sync($request->categories);
+        $story->tags()->sync($request->tags);
+
+        Toastr::success('Story Successfully Updated :)','Success');
+        return redirect()->route('stories.index');
     }
+
 
     /**
      * Remove the specified resource from storage.
@@ -159,7 +202,7 @@ class StoryController extends Controller
     public function destroy(Story $story)
     {
 
-        $story->delete();
+        Story::where(user_id,Auth::user()->id)->destroy($id);
 
         return redirect()->route('stories.index')
                         ->with('success','Story deleted successfully');

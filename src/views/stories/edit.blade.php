@@ -98,75 +98,8 @@
       </ul>
   </div>
 @endif
-  @csrf
-  <form action="{{ route('ultimateblog.store') }}" method="POST" enctype="multipart/form-data">
-    @csrf
-      <div class="main">
-        <div class="section">
-          <div class="container">
-           
-            <div>
-              <div class="row">
-                <div class="form-group">
-                  <label for="image">Featured Image <span class="required">*</span></label>
-                  <input type="file" name="image" id="image" class="form-control">
-              </div>
-                <div class="col-md-7 col-sm-7">
-                  <div class="form-group">
-                    <h6>Name
-                      <span class="icon-danger">*</span>
-                    </h6>
-                    <input type="text" class="form-control border-input" name="title" placeholder="enter the title name here...">
-                  </div>
-                  <div class="form-group">
-                    <h6>Description
-                      <span class="icon-danger">*</span>
-                    </h6>
-                    <input type="text" class="form-control border-input" name="description" placeholder="enter the desc name here...">
-                  </div>
 
-                  <div class="form-group">
-                    <h6>Category
-                        <span class="icon-danger">*</span>
-                      </h6>
-                      <select class="w3-input" name="category">
-                        @foreach($categories as $category)
-                            <option value="{{$category->id}}">{{$category->name}}</option>
-                        @endforeach
-                    </select>
-                  </div>
-                  <div class="form-group form-float">
-                    <div class="form-line {{ $errors->has('tags') ? 'focused error' : '' }}">
-                        <label for="tag">Select Tags</label>
-                        <select name="tags[]" id="tag" class="form-control show-tick" data-live-search="true" multiple>
-                            @foreach($tags as $tag)
-                                <option value="{{ $tag->id }}">{{ $tag->name }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                  <div class="form-group">
-                    <h6>Description</h6>
-
-                    <textarea id="summernote" name="content" ></textarea>
-
-                    <h5>
-                      <small>
-                        <span id="textarea-limited-message" class="pull-right">150 characters left</span>
-                      </small>
-                    </h5>
-                  </div>
-                 
-                    <button class="btn btn-outline-primary" type="submit">Save & Publish </button>
-                  
-                </div>
-              </div>
-              
-              
-
-              </div>
-            </div>
-          </div>
-        </div>
+  
       </div>
       <footer id="footer">
         <div class="container">
