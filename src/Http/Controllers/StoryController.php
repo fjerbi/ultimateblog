@@ -91,12 +91,8 @@ class StoryController extends Controller
         $story->slug=$slug;
         $story->image = $fileNameToStore;
         $story->description=$request->description;
-        $story->content=$request->content;
-        $file = $request->file('student_photo');
-
-       
+        $story->content=$request->content; 
         $story->save();
-
         $story->categories()->attach($request->category);
         $story->tags()->attach($request->tags);
         $subscribers = Subscriber::all();
