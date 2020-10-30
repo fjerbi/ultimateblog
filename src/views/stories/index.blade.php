@@ -167,7 +167,7 @@
                                            <li><button class="btn btn-danger waves-effect" type="button">
                                                 <i class="material-icons">delete</i>
                                             </button></li>
-                                            <form id="delete-form-{{ $story->id }}" action="{{ route('ultimateblog.edit',$story->id) }}" method="POST" style="display: none;">
+                                            <form  id="delete-form-{{ $story->id }}" action="{{ route('ultimateblog.edit',$story->id) }}" method="POST" style="display: none;">
                                                 @csrf
                                                 @method('DELETE')
                                             </form>

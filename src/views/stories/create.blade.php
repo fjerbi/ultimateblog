@@ -109,7 +109,7 @@
               <div class="row">
                 <div class="form-group">
                   <label for="image">Featured Image <span class="required">*</span></label>
-                  <input type="file" name="image" id="image" class="form-control">
+                  <input type="file" name="image " id="image" class="form-control">
               </div>
                 <div class="col-md-7 col-sm-7">
                   <div class="form-group">

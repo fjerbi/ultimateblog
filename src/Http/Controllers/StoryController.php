@@ -188,7 +188,7 @@ class StoryController extends Controller
         $story->categories()->sync($request->categories);
         $story->tags()->sync($request->tags);
 
-        Toastr::success('Story Successfully Updated :)','Success');
+        Toastr::success(' Story Successfully Updated :)','Success');
         return redirect()->route('stories.index');
     }
 

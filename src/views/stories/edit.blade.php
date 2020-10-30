@@ -112,7 +112,7 @@
                 <div class="col-sm-12">
                     <div class="copyright-text text-center">
             
-                        <p>Ultimate blog by <a target="_blank" href="https://fjerbi.github.io">Firas Jerbi</a></p>
+                        <p>Ultimate blog by <a  target="_blank" href="https://fjerbi.github.io">Firas Jerbi</a></p>
                     </div>
                 </div>
             </div>
