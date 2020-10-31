@@ -22,11 +22,7 @@ The Ultimate Blog is a package that allows you to integrate a whole blog system 
 Soon ..
 
 # Screenshots:
-## One post page
-![Alt text](initial_release_screensthots/demo1.png?raw=true "One post")
-## Blog Homepage
-![Alt text](initial_release_screensthots/demo2.png?raw=true "Home page")
-## Getting error while liking a post because the user is not logged in
-![Alt text](initial_release_screensthots/demo3.png?raw=true "Error while liking a post cause user is nor logged in")
-## Creating one Post
-![Alt text](initial_release_screensthots/demo4.png?raw=true "Create a post")
+## Ultimate blog Home page
+![Alt text](initial_release_screensthots/demo1.png?raw=true "HomePage")
+##  One post page
+![Alt text](initial_release_screensthots/demo2.png?raw=true "One Post")
