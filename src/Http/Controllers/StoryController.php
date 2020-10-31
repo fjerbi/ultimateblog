@@ -5,6 +5,7 @@ namespace fjerbi\ultimateblog\Http\Controllers;
 use Illuminate\Support\Str;
 use Auth;
 use fjerbi\ultimateblog\Category;
+use fjerbi\ultimateblog\Comment;
 use fjerbi\ultimateblog\Tag;
 use fjerbi\ultimateblog\Story;
 use fjerbi\ultimateblog\Subscriber;
@@ -24,9 +25,11 @@ class StoryController extends Controller
      */
     public function index()
     {
+        $comments= Comment::all();
+        $categories = Category::all();
         $stories = Story::latest()->paginate(5);
-        $tags = Story::all();
-        return view('ultimateblog::stories.index',compact('stories','tags'));
+        $tags = Tag::all();
+        return view('ultimateblog::stories.index',compact('stories','categories','tags','comments'));
 
     }
 

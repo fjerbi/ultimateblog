@@ -26,7 +26,7 @@
 
 
 <body>
-	<header id="header">      
+    <header id="header">      
         
         <div class="navbar navbar-inverse" role="banner">
             <div class="container">
@@ -46,11 +46,18 @@
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav navbar-right">
                         <li><a href={{route('ultimateblog.index')}}>Home</a></li>
-
-                     
-                        <ul class="navbar-nav ml-auto">
-                            <!-- Authentication Links -->
-                            @guest
+                        
+                        @guest
+                      <li> <div class="alert alert-danger" role="alert">
+                           You need to be logged in in order to create a story
+                          </div></li> 
+            @else
+                        <li><a href={{route('ultimateblog.create')}}>Create A post</a></li>
+                        @endguest
+                        <li class="dropdown"><a href="#">Account <i class="fa fa-angle-down"></i></a>
+                            <ul role="menu" class="sub-menu">
+                                @guest
+                            
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
                                 </li>
@@ -61,11 +68,10 @@
                                 @endif
                             @else
                                 <li class="nav-item dropdown">
-                                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="{{route('profile')}}" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                        {{ Auth::user()->name }} <span class="caret"></span>
+                                    <a  class="dropdown-item" href="{{route('profile')}}">
+                                        {{ Auth::user()->name }}
                                     </a>
     
-                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                         <a class="dropdown-item" href="{{ route('logout') }}"
                                            onclick="event.preventDefault();
                                                          document.getElementById('logout-form').submit();">
@@ -75,10 +81,12 @@
                                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                             @csrf
                                         </form>
-                                    </div>
+                                   
                                 </li>
                             @endguest
-                        </ul>
+                            </ul>
+                        </li>         
+                    
 
                     </ul>
                 </div>
@@ -86,7 +94,6 @@
             </div>
         </div>
     </header>
-    <!--/#header-->
 
    
 
@@ -126,7 +133,7 @@
                                         <div class="col-md-6 col-sm-12 blog-padding-right">
                                             <div class="single-blog two-column">
                                                 <div class="post-thumb">
-                                                    <a href="{{ route('story.details',$story->slug) }}"><img src="https://elements-video-cover-images-0.imgix.net/files/c59153ca-3e05-4b41-8c95-70dd65500227/inline_image_preview.jpg?auto=compress%2Cformat&fit=min&h=394&w=700&s=c15e336b9593319970b963b94eae1107" class="img-responsive" alt=""></a>
+                                                    <a href="{{ route('story.details',$story->slug) }}"><img src="/storage/images/{{$story->image}}" class="img-responsive" alt=""></a>
                                                     <div class="post-overlay">
                                                         <span class="uppercase"><a href="#"><small>{{$story->created_at->diffForHumans()}}</small> <br></a></span>
                                                     </div>
