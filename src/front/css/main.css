@@ -10,7 +10,88 @@
   @import url(http://fonts.googleapis.com/css?family=Lato:100,300,400,700);
   @import url(http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,300,600,700);
   @import url(http://fonts.googleapis.com/css?family=Noto+Sans:400,700);
-
+ body {
+    margin: 0;
+    padding: 0;
+  }
+  main {
+    height: 100vh;
+    width: 100vw;
+    transition: background 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  main p {
+    align-self: center;
+    font-family: sans-serif;
+    transition: color 0.3s ease;
+  }
+  /*TOGGLE COLORS*/
+  .dark {
+    background: #303132;
+    color: #efefef;
+  }
+  p {
+    background: none !important;
+  }
+  /*SWITCH*/
+  .switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+    align-self: center;
+  }
+  
+  .switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+  
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: 0.4s;
+    transition: 0.4s;
+  }
+  
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: 0.4s;
+    transition: 0.4s;
+  }
+  
+  input:checked + .slider {
+    background-color: #2196f3;
+  }
+  
+  input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+  }
+  
+  /* Rounded sliders */
+  .slider {
+    border-radius: 30px;
+  }
+  
+  .slider:before {
+    border-radius: 50%;
+  }
   body {
     background: #fff;
     font-family: 'Lato', sans-serif;
@@ -712,9 +793,7 @@ ul.sub-menu {
 .single-features .col-sm-6 h2{
     margin-top: 0;
 }
-.single-features .col-sm-6 {
-/*  margin-top: 50px;*/
-}
+
 
 .single-features:last-child {
   padding-bottom: 95px;
@@ -803,8 +882,6 @@ ul.sub-menu {
   position: relative;
 }
 
-.person-thumb img {
-}
 
 
 .social-profile {
@@ -1718,7 +1795,7 @@ Blog with right sidebar
 Blog with right sidebar
 *****************************/
 
-.masonery_area .single-blog{}
+
 .masonery_area .single-blog .post-thumb{
   height: auto;
 }

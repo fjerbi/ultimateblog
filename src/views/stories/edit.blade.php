@@ -25,7 +25,7 @@
 </head><!--/head-->
 
 
-<body>
+<body id="main">
 	<header id="header">      
         
         <div class="navbar navbar-inverse" role="banner">
@@ -85,16 +85,21 @@
                                 </li>
                             @endguest
                             </ul>
-                        </li>         
-                    
-
+                          
+                        </li>                            
+                        <li style="margin-top: 16px;">                           
+                            <label class="switch">
+                              <input type="checkbox" onclick="darkLight()" id="checkBox" >
+                              <span class="slider"></span>
+                            </label>
+                        </li>
                     </ul>
                 </div>
                 
             </div>
         </div>
     </header>
-
+    <!--/#header-->
   @if ($errors->any())
   <div class="alert alert-danger">
       <strong>Whoops!</strong> There were some problems with your input.<br><br>
@@ -281,6 +286,31 @@
   trigger: 'focus'
 })
   </script>
+
+<script type="text/javascript">
+    $('#main').toggleClass(localStorage.toggled);
+   
+   function darkLight() {
+     /*DARK CLASS*/
+     if (localStorage.toggled != 'dark') {
+       $('#main, p').toggleClass('dark', true);
+       localStorage.toggled = "dark";
+        
+     } else {
+       $('#main, p').toggleClass('dark', false);
+       localStorage.toggled = "";
+     }
+   }
+   
+   /*Add 'checked' property to input if background == dark*/
+   if ($('main').hasClass('dark')) {
+      $( '#checkBox' ).prop( "checked", true )
+   } else {
+     $( '#checkBox' ).prop( "checked", false )
+   }
+   
+   
+       </script>
 </body>
 <!-- Mirrored from demos.creative-tim.com/paper-kit-2-pro/examples/landing-page.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 30 Mar 2020 13:50:54 GMT -->
 </html>

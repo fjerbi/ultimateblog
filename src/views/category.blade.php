@@ -26,70 +26,81 @@
 
 
 <body>
-	<header id="header">      
+    <body id="main">
+        <header id="header">      
+            
+            <div class="navbar navbar-inverse" role="banner">
+                <div class="container">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+    
+                        <a class="navbar-brand" href="#">
+                            <h1>Ultimate Blog</h1>
+                        </a>
+                        
+                    </div>
+                    <div class="collapse navbar-collapse">
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a href={{route('ultimateblog.index')}}>Home</a></li>
+                            
+                            @guest
+                          <li> <div class="alert alert-danger" role="alert">
+                               You need to be logged in in order to create a story
+                              </div></li> 
+                @else
+                            <li><a href={{route('ultimateblog.create')}}>Create A post</a></li>
+                            @endguest
+                            <li class="dropdown"><a href="#">Account <i class="fa fa-angle-down"></i></a>
+                                <ul role="menu" class="sub-menu">
+                                    @guest
+                                
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                    </li>
+                                    @if (Route::has('register'))
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                        </li>
+                                    @endif
+                                @else
+                                    <li class="nav-item dropdown">
+                                        <a  class="dropdown-item" href="{{route('profile')}}">
+                                            {{ Auth::user()->name }}
+                                        </a>
         
-        <div class="navbar navbar-inverse" role="banner">
-            <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-
-                    <a class="navbar-brand" href="#">
-                        <h1>Ultimate Blog</h1>
-                    </a>
+                                            <a class="dropdown-item" href="{{ route('logout') }}"
+                                               onclick="event.preventDefault();
+                                                             document.getElementById('logout-form').submit();">
+                                                {{ __('Logout') }}
+                                            </a>
+        
+                                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                                @csrf
+                                            </form>
+                                       
+                                    </li>
+                                @endguest
+                                </ul>
+                              
+                            </li>                            
+                            <li style="margin-top: 16px;">                           
+                                <label class="switch">
+                                  <input type="checkbox" onclick="darkLight()" id="checkBox" >
+                                  <span class="slider"></span>
+                                </label>
+                            </li>
+                        </ul>
+                    </div>
                     
                 </div>
-                <div class="collapse navbar-collapse">
-                    <ul class="nav navbar-nav navbar-right">
-                        <li><a href={{route('ultimateblog.index')}}>Home</a></li>
-
-                     
-                        <ul class="navbar-nav ml-auto">
-                            <!-- Authentication Links -->
-                            @guest
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                                </li>
-                                @if (Route::has('register'))
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                    </li>
-                                @endif
-                            @else
-                                <li class="nav-item dropdown">
-                                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="{{route('profile')}}" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                        {{ Auth::user()->name }} <span class="caret"></span>
-                                    </a>
-    
-                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                        <a class="dropdown-item" href="{{ route('logout') }}"
-                                           onclick="event.preventDefault();
-                                                         document.getElementById('logout-form').submit();">
-                                            {{ __('Logout') }}
-                                        </a>
-    
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                            @csrf
-                                        </form>
-                                    </div>
-                                </li>
-                            @endguest
-                        </ul>
-
-                    </ul>
-                </div>
-                
             </div>
-        </div>
-    </header>
-    <!--/#header-->
-
-         
-
+        </header>
+        <!--/#header-->
 
 
 
@@ -174,6 +185,30 @@
     <script type="text/javascript" src="{{asset('vendor/fjerbi/ultimateblog/js/wow.min.js')}}"></script>
     <script type="text/javascript" src="{{asset('vendor/fjerbi/ultimateblog/js/main.js')}}"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.2/js/toastr.min.js"></script>
+    <script type="text/javascript">
+        $('#main').toggleClass(localStorage.toggled);
+       
+       function darkLight() {
+         /*DARK CLASS*/
+         if (localStorage.toggled != 'dark') {
+           $('#main, p').toggleClass('dark', true);
+           localStorage.toggled = "dark";
+            
+         } else {
+           $('#main, p').toggleClass('dark', false);
+           localStorage.toggled = "";
+         }
+       }
+       
+       /*Add 'checked' property to input if background == dark*/
+       if ($('main').hasClass('dark')) {
+          $( '#checkBox' ).prop( "checked", true )
+       } else {
+         $( '#checkBox' ).prop( "checked", false )
+       }
+       
+       
+           </script>
 </body>
 </html>
 

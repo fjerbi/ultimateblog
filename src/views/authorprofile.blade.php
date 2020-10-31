@@ -25,8 +25,8 @@
 </head><!--/head-->
 
 
-<body>
-    <header id="header">      
+<body id="main">
+	<header id="header">      
         
         <div class="navbar navbar-inverse" role="banner">
             <div class="container">
@@ -85,15 +85,21 @@
                                 </li>
                             @endguest
                             </ul>
-                        </li>         
-                    
-
+                          
+                        </li>                            
+                        <li style="margin-top: 16px;">                           
+                            <label class="switch">
+                              <input type="checkbox" onclick="darkLight()" id="checkBox" >
+                              <span class="slider"></span>
+                            </label>
+                        </li>
                     </ul>
                 </div>
                 
             </div>
         </div>
     </header>
+    <!--/#header-->
 
    
 
@@ -239,6 +245,30 @@
     <script type="text/javascript" src="{{asset('vendor/fjerbi/ultimateblog/js/wow.min.js')}}"></script>
     <script type="text/javascript" src="{{asset('vendor/fjerbi/ultimateblog/js/main.js')}}"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.2/js/toastr.min.js"></script>
+    <script type="text/javascript">
+        $('#main').toggleClass(localStorage.toggled);
+       
+       function darkLight() {
+         /*DARK CLASS*/
+         if (localStorage.toggled != 'dark') {
+           $('#main, p').toggleClass('dark', true);
+           localStorage.toggled = "dark";
+            
+         } else {
+           $('#main, p').toggleClass('dark', false);
+           localStorage.toggled = "";
+         }
+       }
+       
+       /*Add 'checked' property to input if background == dark*/
+       if ($('main').hasClass('dark')) {
+          $( '#checkBox' ).prop( "checked", true )
+       } else {
+         $( '#checkBox' ).prop( "checked", false )
+       }
+       
+       
+           </script>
 </body>
 </html>
 

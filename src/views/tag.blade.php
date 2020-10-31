@@ -24,8 +24,7 @@
     <link rel="apple-touch-icon-precomposed" href="{{asset('vendor/fjerbi/ultimateblog/images/ico/apple-touch-icon-57-precomposed.png')}}">
 </head><!--/head-->
 
-
-<body>
+<body id="main">
 	<header id="header">      
         
         <div class="navbar navbar-inverse" role="banner">
@@ -46,11 +45,18 @@
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav navbar-right">
                         <li><a href={{route('ultimateblog.index')}}>Home</a></li>
-
-                     
-                        <ul class="navbar-nav ml-auto">
-                            <!-- Authentication Links -->
-                            @guest
+                        
+                        @guest
+                      <li> <div class="alert alert-danger" role="alert">
+                           You need to be logged in in order to create a story
+                          </div></li> 
+            @else
+                        <li><a href={{route('ultimateblog.create')}}>Create A post</a></li>
+                        @endguest
+                        <li class="dropdown"><a href="#">Account <i class="fa fa-angle-down"></i></a>
+                            <ul role="menu" class="sub-menu">
+                                @guest
+                            
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
                                 </li>
@@ -61,11 +67,10 @@
                                 @endif
                             @else
                                 <li class="nav-item dropdown">
-                                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="{{route('profile')}}" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                        {{ Auth::user()->name }} <span class="caret"></span>
+                                    <a  class="dropdown-item" href="{{route('profile')}}">
+                                        {{ Auth::user()->name }}
                                     </a>
     
-                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                         <a class="dropdown-item" href="{{ route('logout') }}"
                                            onclick="event.preventDefault();
                                                          document.getElementById('logout-form').submit();">
@@ -75,11 +80,18 @@
                                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                             @csrf
                                         </form>
-                                    </div>
+                                   
                                 </li>
                             @endguest
-                        </ul>
-
+                            </ul>
+                          
+                        </li>                            
+                        <li style="margin-top: 16px;">                           
+                            <label class="switch">
+                              <input type="checkbox" onclick="darkLight()" id="checkBox" >
+                              <span class="slider"></span>
+                            </label>
+                        </li>
                     </ul>
                 </div>
                 
@@ -114,7 +126,7 @@
                                 <p> {{$story->description}}</p>
                                 <a href="{{ route('story.details',$story->slug) }}" class="read-more">View More</a>
                                 @guest
-                                <a   class="btn btn-link btn-neutral" href="javascript:void(0);" onclick="toastr.info('To add favorite list. You need to login first.','Info',{
+                                <a   class="btn btn-link btn-neutral" href="javascript:void(0);" onclick="toastr.info('To like this story you need first to login.','Info',{
                                     closeButton: true,
                                     progressBar: true,
                                 })"> <i class="fa fa-thumbs-up" aria-hidden="true"></i>{{ $story->favorite_to_users->count() }}</a>
@@ -174,6 +186,30 @@
     <script type="text/javascript" src="{{asset('vendor/fjerbi/ultimateblog/js/wow.min.js')}}"></script>
     <script type="text/javascript" src="{{asset('vendor/fjerbi/ultimateblog/js/main.js')}}"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.2/js/toastr.min.js"></script>
+    <script type="text/javascript">
+        $('#main').toggleClass(localStorage.toggled);
+       
+       function darkLight() {
+         /*DARK CLASS*/
+         if (localStorage.toggled != 'dark') {
+           $('#main, p').toggleClass('dark', true);
+           localStorage.toggled = "dark";
+            
+         } else {
+           $('#main, p').toggleClass('dark', false);
+           localStorage.toggled = "";
+         }
+       }
+       
+       /*Add 'checked' property to input if background == dark*/
+       if ($('main').hasClass('dark')) {
+          $( '#checkBox' ).prop( "checked", true )
+       } else {
+         $( '#checkBox' ).prop( "checked", false )
+       }
+       
+       
+           </script>
 </body>
 </html>
 

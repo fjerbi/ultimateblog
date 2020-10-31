@@ -22,10 +22,11 @@
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="{{asset('vendor/fjerbi/ultimateblog/images/ico/apple-touch-icon-114-precomposed.png')}}">
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="{{asset('vendor/fjerbi/ultimateblog/images/ico/apple-touch-icon-72-precomposed.png')}}">
     <link rel="apple-touch-icon-precomposed" href="{{asset('vendor/fjerbi/ultimateblog/images/ico/apple-touch-icon-57-precomposed.png')}}">
+
 </head><!--/head-->
 
 
-<body>
+<body id="main">
 	<header id="header">      
         
         <div class="navbar navbar-inverse" role="banner">
@@ -85,9 +86,14 @@
                                 </li>
                             @endguest
                             </ul>
-                        </li>         
-                    
-
+                          
+                        </li>                            
+                        <li style="margin-top: 16px;">                           
+                            <label class="switch">
+                              <input type="checkbox" onclick="darkLight()" id="checkBox" >
+                              <span class="slider"></span>
+                            </label>
+                        </li>
                     </ul>
                 </div>
                 
@@ -137,7 +143,9 @@
                             <h3>Stories Comments</h3>
                             @foreach($comments as $comment)
                             <div class="media">
-                               
+                                <div class="pull-left">
+                                    <a href="#"><img src="images/portfolio/project1.jpg" alt=""></a>
+                                </div>
                                 <div class="media-body">
                                     <h4><a href="#">{{$comment->comment}} By <p>{{$comment->user->name}}</p></a></h4>
                                     <p>{{$comment->created_at->diffForHumans()}}</p>
@@ -195,7 +203,7 @@
                                     <div class="post-bottom clearfix">
                                         <ul class="nav navbar-nav post-nav">
                                             @guest
-                                      <li>     <a   class="btn btn-link btn-neutral" href="javascript:void(0);" onclick="toastr.info('To add favorite list. You need to login first.','Info',{
+                                      <li>     <a   class="btn btn-link btn-neutral" href="javascript:void(0);" onclick="toastr.info('To like this story you need first to login.','Info',{
                                                 closeButton: true,
                                                 progressBar: true,
                                             })"> <i class="fa fa-thumbs-up" aria-hidden="true"></i>{{ $story->favorite_to_users->count() }}</a></li> 
@@ -254,7 +262,30 @@
     <script type="text/javascript" src="{{asset('vendor/fjerbi/ultimateblog/js/wow.min.js')}}"></script>
     <script type="text/javascript" src="{{asset('vendor/fjerbi/ultimateblog/js/main.js')}}"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.2/js/toastr.min.js"></script>
-   
+    <script type="text/javascript">
+ $('#main').toggleClass(localStorage.toggled);
+
+function darkLight() {
+  /*DARK CLASS*/
+  if (localStorage.toggled != 'dark') {
+    $('#main, p').toggleClass('dark', true);
+    localStorage.toggled = "dark";
+     
+  } else {
+    $('#main, p').toggleClass('dark', false);
+    localStorage.toggled = "";
+  }
+}
+
+
+if ($('main').hasClass('dark')) {
+   $( '#checkBox' ).prop( "checked", true )
+} else {
+  $( '#checkBox' ).prop( "checked", false )
+}
+
+
+    </script>
 </body>
 </html>
 
