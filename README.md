@@ -18,9 +18,6 @@ The Ultimate Blog is a package that allows you to integrate a whole blog system 
 * Follow/Unfollow Author
 * Admin panel 
 
-# Package Configuration: 
-Soon ..
-
 # Screenshots:
 ## Ultimate blog Home page
 ![Alt text](initial_release_screensthots/demo1.png?raw=true "HomePage")
