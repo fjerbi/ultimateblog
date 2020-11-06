@@ -38,3 +38,6 @@ composer require fjerbi/ultimateblog
 ### Don't forget to config your .env file and configure your email 
 ### Finally you can access the blog by typing
 `http://localhost:8000/ultimateblog`
+
+# Note:
+This package works with Laravel 5.* and 6.*
